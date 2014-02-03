@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4pt">
+
+        <TextView
+            android:id="@+id/txtMagnitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.0"
+            android:textAlignment="center"
+            android:textSize="20pt"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtSr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SR"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+       
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+            android:paddingLeft="4pt">
+
+            <TextView
+                android:id="@+id/txtWilayah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="27 km BaratDaya BANGGAIKEP-SULTENG"
+                android:textColor="@color/text_color_main"
+                android:textSize="6pt"
+                android:textStyle="bold" />
+
+"
+
+            <TextView
+                android:id="@+id/txtTanggalJam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/txtWilayah"
+                android:text="14-Jan-14 21:18:46 WIB"
+                android:textSize="5pt" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/detail" />
+            
+        </RelativeLayout>
+    </LinearLayout>
+
+    
+</LinearLayout>

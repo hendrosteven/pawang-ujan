@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="level1">#74DF00</color>
+    <color name="level2">#DBA901</color>
+    <color name="level3">#DF7401</color>
+    <color name="level4">#DF0101</color>
+</resources>

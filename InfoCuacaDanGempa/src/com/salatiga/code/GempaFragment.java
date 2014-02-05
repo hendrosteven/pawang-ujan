@@ -22,9 +22,10 @@ import android.widget.ProgressBar;
 
 /**
  * Class ini adalah tampilan untuk tab gempa
+ * 
  * @author Hendro Steven Tampake
  * @version 1.0
- *
+ * 
  */
 public class GempaFragment extends Fragment {
 
@@ -37,7 +38,7 @@ public class GempaFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.gempa, container, false);		
+		View rootView = inflater.inflate(R.layout.gempa, container, false);
 		return rootView;
 	}
 
@@ -51,12 +52,17 @@ public class GempaFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, final View view,
 					int position, long id) {
-				final Gempa itemGempa = (Gempa) parent.getItemAtPosition(position);
+				final Gempa itemGempa = (Gempa) parent
+						.getItemAtPosition(position);
 				Intent mapActivity = new Intent(getView().getContext(),
 						MapActivity.class);
+				mapActivity.putExtra("tanggal", itemGempa.getTanggal());
 				mapActivity.putExtra("latitude", itemGempa.getLatitude());
 				mapActivity.putExtra("longitude", itemGempa.getLongitude());
+				mapActivity.putExtra("magnitude", itemGempa.getMagnitude());
+				mapActivity.putExtra("kedalaman", itemGempa.getKedalaman());
 				mapActivity.putExtra("description", itemGempa.getKeterangan());
+				mapActivity.putExtra("dirasakan", itemGempa.getDirasakan());
 				startActivity(mapActivity);
 			}
 
@@ -106,15 +112,10 @@ public class GempaFragment extends Fragment {
 			listGempa.setAdapter(new GempaListAdapter(getView().getContext(),
 					result));
 			progress.setVisibility(View.INVISIBLE);
-			// Displays the HTML string in the UI via a WebView
-			// WebView myWebView = (WebView) findViewById(R.id.webView);
-			// myWebView.loadData(result, "text/html", null);
-
+			
 		}
 	}
 
-	// Uploads XML from stackoverflow.com, parses it, and combines it with
-	// HTML markup. Returns HTML string.
 	private List<Gempa> loadXmlFromNetwork(String urlString)
 			throws XmlPullParserException, IOException {
 		InputStream stream = null;
@@ -123,9 +124,7 @@ public class GempaFragment extends Fragment {
 
 		try {
 			stream = downloadUrl(urlString);
-			gempas = gempaParser.parse(stream);
-			// Makes sure that the InputStream is closed after the app is
-			// finished using it.
+			gempas = gempaParser.parse(stream);			
 		} finally {
 			if (stream != null) {
 				stream.close();

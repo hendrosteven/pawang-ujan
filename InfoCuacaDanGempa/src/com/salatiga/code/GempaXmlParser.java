@@ -52,11 +52,7 @@ public class GempaXmlParser {
 		return entries;
 	}
 
-	// Parses the contents of an entry. If it encounters a title, summary, or
-	// link tag, hands them
-	// off
-	// to their respective &quot;read&quot; methods for processing. Otherwise,
-	// skips the tag.
+
 	private Gempa readGempa(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		parser.require(XmlPullParser.START_TAG, ns, "Gempa");

@@ -45,15 +45,6 @@ public class GempaListAdapter extends ArrayAdapter<Gempa>{
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
-		/*LayoutInflater inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.gempa_item, parent, false);
-		TextView txtWilayah = (TextView) rowView.findViewById(R.id.txtWilayah);
-		TextView txtTanggalJam = (TextView)rowView.findViewById(R.id.txtTanggalJam);		
-		TextView txtMagnitude = (TextView)rowView.findViewById(R.id.txtMagnitude);
-		TextView txtSr = (TextView)rowView.findViewById(R.id.txtSr);
-		*/
-		
 		Gempa gempa = listGempa.get(position);	
 		
 		holder.txtWilayah.setText(gempa.getKeterangan());

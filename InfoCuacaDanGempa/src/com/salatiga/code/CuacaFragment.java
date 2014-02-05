@@ -28,7 +28,8 @@ import android.widget.TextView;
 
 public class CuacaFragment extends Fragment {
 
-	private static final String URL = "http://api.openweathermap.org/data/2.5/weather";
+	private static final String URL_WEATHER = "http://api.openweathermap.org/data/2.5/weather";
+	private static final String URL_DAILY = "http://api.openweathermap.org/data/2.5/forecast/daily";
 	private static final String IMG_URL = "http://openweathermap.org/img/w/";
 
 	private double latitude;
@@ -116,25 +117,9 @@ public class CuacaFragment extends Fragment {
 		protected String doInBackground(Void... loc) {
 			String html = "";
 			try {
-				// Creating service handler class instance
-				ServiceHandler sh = new ServiceHandler();
-
-				// params setup
-				List<NameValuePair> params = new ArrayList<NameValuePair>();
-				if (city.length() > 0) {
-					params.add(new BasicNameValuePair("q", city));
-				} else {
-					params.add(new BasicNameValuePair("lat", String
-							.valueOf(this.lat)));
-					params.add(new BasicNameValuePair("lon", String
-							.valueOf(this.lon)));
-				}
-				params.add(new BasicNameValuePair("mode", "json"));
-				params.add(new BasicNameValuePair("units", "metric"));
-				// Making a request to url and getting response
-				String jsonStr = sh.makeServiceCall(URL, ServiceHandler.GET,
-						params);
-				html = parseJSONKota(jsonStr);
+				//get current weather		
+				html = parseJSONWeather(getJSONWeather(city,lat,lon));
+				html += parseJSONDaily(getJSONDaily(city,lat,lon));
 
 			} catch (Exception e) {
 				html = "Gagal mendapatkan informasi cuaca...";
@@ -151,8 +136,50 @@ public class CuacaFragment extends Fragment {
 			myWebView.loadData(result, "text/html", null);
 		}
 	}
+	
+	private String getJSONDaily(String city, double lat, double lon){
+		String jsonStr = "";
+		return jsonStr;
+	}
+	
+	private String parseJSONDaily(String jsonStr) {
+		StringBuffer strBuffer = new StringBuffer();
+		// parse json string
+		if (jsonStr != null) {
+			try {
+				
+			} catch (Exception e) {
+				strBuffer.append("Gagal mendapatkan informasi cuaca harian...");
+			}
+		} else {
+			strBuffer.append("Gagal mendapatkan informasi cuaca harian... ");
+		}
+		return strBuffer.toString();
+	}
 
-	private String parseJSONKota(String jsonStr) {
+	
+	private String getJSONWeather(String city,double lat, double lon){
+		ServiceHandler sh = new ServiceHandler();
+
+		// params setup
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		if (city.length() > 0) {
+			params.add(new BasicNameValuePair("q", city));
+		} else {
+			params.add(new BasicNameValuePair("lat", String
+					.valueOf(lat)));
+			params.add(new BasicNameValuePair("lon", String
+					.valueOf(lon)));
+		}
+		params.add(new BasicNameValuePair("mode", "json"));
+		params.add(new BasicNameValuePair("units", "metric"));
+		// Making a request to url and getting response
+		String jsonStr = sh.makeServiceCall(URL_WEATHER, ServiceHandler.GET,
+				params);
+		return jsonStr;
+	}
+
+	private String parseJSONWeather(String jsonStr) {
 		StringBuffer strBuffer = new StringBuffer();
 		// parse json string
 		if (jsonStr != null) {
@@ -202,5 +229,7 @@ public class CuacaFragment extends Fragment {
 		}
 		return strBuffer.toString();
 	}
+	
+	
 
 }
